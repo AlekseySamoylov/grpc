@@ -25,7 +25,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-    implementation("io.grpc:grpc-netty-shaded:1.30.2")
+    implementation("io.grpc:grpc-netty-shaded:1.30.2") // shaded: includes ssl libraries
     implementation("io.grpc:grpc-protobuf:1.30.2")
     implementation("io.grpc:grpc-stub:1.30.2")
     compileOnly("org.apache.tomcat:annotations-api:6.0.53")
