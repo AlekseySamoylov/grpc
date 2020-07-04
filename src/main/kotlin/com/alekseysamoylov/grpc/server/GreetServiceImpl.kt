@@ -1,9 +1,8 @@
 package com.alekseysamoylov.grpc.server
 
-import com.proto.dummy.GreetRequest
-import com.proto.dummy.GreetResponse
-import com.proto.dummy.GreetServiceGrpc
+import com.proto.dummy.*
 import io.grpc.stub.StreamObserver
+import java.util.concurrent.TimeUnit
 
 
 class GreetServiceImpl : GreetServiceGrpc.GreetServiceImplBase() {
@@ -15,6 +14,25 @@ class GreetServiceImpl : GreetServiceGrpc.GreetServiceImplBase() {
             .build()
         // send response
         responseObserver.onNext(response)
+        // complete the RPC call
+        responseObserver.onCompleted()
+    }
+
+    override fun greetManyTimes(
+        request: GreetManyTimesRequest,
+        responseObserver: StreamObserver<GreetManyTimesResponse>
+    ) {
+        val greeting = request.greeting
+
+        repeat(10) {
+            val result = "Hello ${greeting.firstName} ${greeting.lastName}, response number: $it"
+            val response = GreetManyTimesResponse.newBuilder()
+                .setResult(result)
+                .build()
+            // send response
+            responseObserver.onNext(response)
+            TimeUnit.SECONDS.sleep(1)
+        }
         // complete the RPC call
         responseObserver.onCompleted()
     }
