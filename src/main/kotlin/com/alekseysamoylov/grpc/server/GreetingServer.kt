@@ -10,7 +10,9 @@ fun main() {
     println("Hello I'm a gRPC server")
 
     val server = ServerBuilder.forPort(50051)
+        .addService(GreetServiceImpl())
         .build()
+
     server.start()
 
     Runtime.getRuntime().addShutdownHook(Thread{
