@@ -1,5 +1,4 @@
 import com.google.protobuf.gradle.*
-import com.google.protobuf.gradle.protobuf
 
 buildscript {
     repositories {
@@ -12,6 +11,7 @@ buildscript {
 
 plugins {
     java
+    idea
     kotlin("jvm") version "1.3.72"
     id("com.google.protobuf") version "0.8.12"
 }
